@@ -24,6 +24,9 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
+                sh 'docker build -t java-app .'
+                sh 'docker stop java-app && docker rm java-app'
+                sh 'docker run java-app'
             }
         }
     }
